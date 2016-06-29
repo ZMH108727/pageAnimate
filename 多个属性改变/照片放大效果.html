@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src='move2.js'></script>
+	<style type="text/css">
+	.photos{
+		width: 1144px;
+		height: 688px;
+		overflow: hidden;		
+		margin:20px auto;
+		position: relative;
+	}
+	img{
+		float: left;
+		width: 143px;
+		z-index: 999999999999;
+		height: 172px;
+	}
+	</style>
+</head>
+<body>
+	<div class="photos">
+		
+	</div>
+	<script type="text/javascript">
+	var box = document.getElementsByClassName('photos')[0];
+	for (var i = 0; i < 40; i++) {
+		var img = new Image();
+		img.src = '../photos/' + i + '.png';
+		box.appendChild(img);
+	};
+
+
+
+	// document.getElementById('box').style.height = document.getElementById('box').offsetHeight + 'px';
+	var zIndex = 9999999;
+
+	var imgs = box.getElementsByTagName('img');
+
+	for (var i = 0; i < imgs.length; i++) {
+		imgs[i].style.left = imgs[i].offsetLeft + 'px';
+		imgs[i].style.top = imgs[i].offsetTop + 'px';
+	};
+
+	for (var i = 0; i < imgs.length; i++) {
+		imgs[i].style.position = 'absolute';
+		imgs[i].style.zIndex = zIndex;
+	};
+
+	var imgWidth = imgs[0].offsetWidth;
+	var imgHeight = imgs[0].offsetHeight;
+	for (var i = 0; i < imgs.length; i++) {
+		imgs[i].onmouseover = function(){
+			zIndex--;
+			this.style.zIndex = zIndex;
+			startMove(this,{"width":imgWidth*1.4,"height":imgHeight*1.4,"marginLeft":-imgWidth*0.2,"marginTop":-imgHeight*0.1})
+		}
+		imgs[i].onmouseout = function(){
+			startMove(this,{"width":imgWidth,"height":imgHeight,"marginLeft":0,"marginTop":0})
+		}
+	};
+
+
+	</script>
+</body>
+</html>

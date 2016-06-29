@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	body{
+		cursor: 'url(1.icon),auto';
+	}
+	#div1{
+		width: 10px;
+		height: 10px;
+		border-radius:50%;
+		background-color: gold;
+		position: absolute;
+		display: none;
+		cursor: 'url(1.jpg)';
+	}
+	div{
+		width: 10px;
+		height: 10px;
+		background-color: gold;
+		position: absolute;
+		cursor: 'url(1.jpg)';
+	}
+	</style>
+
+	<script type="text/javascript">
+	
+
+	window.onload = function(){
+		var oDiv = document.getElementById('div1');
+
+		document.onmousedown = function(ev){
+			var oEvent = ev||window.event;
+			oDiv.style.left = oEvent.clientX - 5 + 'px';
+			oDiv.style.top = oEvent.clientY - 5 + 'px';
+			oDiv.style.display = 'block';
+			document.onmousemove = function(ev){
+				var oEvent = ev||window.event;
+				oDiv.style.left = oEvent.clientX - 5 + 'px';
+				oDiv.style.top = oEvent.clientY - 5 + 'px';
+				var div = document.createElement('div');
+				div.style.left = oEvent.clientX - 5 + 'px';
+				div.style.top = oEvent.clientY - 5 + 'px';
+				document.body.appendChild(div);
+			}
+			document.onmouseup = function(){
+				document.onmousemove = null;
+				document.onmouseup = null;
+				oDiv.style.display = 'none';
+			}
+			return false;
+		}
+	}
+
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+</body>
+</html>

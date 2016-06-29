@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{
+		margin:0;
+		padding:0;
+	}
+	div{
+		width:100px;
+		height: 100px;
+		background-color: #08BBf2;
+		position: absolute;
+		left:20px;
+	}
+	#div2{
+		width:1px ;
+		height: 400px;
+		position:absolute;
+		left:600px;
+		background-color: #000;
+
+	}
+	</style>
+</head>
+<body>
+	<div id='div1'></div>
+	<div id="div2"></div>
+	<script type="text/javascript">
+	var oDiv = document.getElementById('div1');
+	oDiv.onclick = startMove(oDiv,600);
+	function startMove(obj,iTarget){
+		var timer ;
+		var iSpeed = 30;
+		timer = setInterval(function(){
+			
+			if(obj.offsetLeft+iSpeed >= iTarget){
+				obj.style.left = iTarget + 'px';
+				clearInterval(timer);
+			}else{
+				obj.style.left = obj.offsetLeft+iSpeed+'px';
+			}
+		},30);
+
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{
+		margin:0;
+		padding:0;
+		font-family: '微软雅黑';
+	}
+	input{
+		width:100px;
+		height: 40px;
+		border:0;
+		background-color: #08bbf2;
+		color: #fff;
+		text-align: center;
+		line-height: 40px;
+		font-size: 18px;
+		border-radius: 10px;
+		outline: none;
+		margin-top:40px;
+		cursor: pointer;
+	}
+	#div1{
+		width: 100px;
+		height: 100px;
+		position: absolute;
+		left: 000px;
+		top:200px;
+		background-color: #394;
+	}
+	.line{
+		width: 1px;
+		height: 600px;
+		background-color: red;
+		position: absolute;
+		left: 400px;
+		top: 0;
+	}
+	.line1{
+		width: 1px;
+		height: 600px;
+		background-color: black;
+		position: absolute;
+		left: 800.95489713215646px;
+		top: 0;
+	}
+	</style>
+	<script type="text/javascript">
+		var timer = null;
+		function startMove(iTarget){
+			clearInterval(timer);
+			var oDiv = document.getElementById('div1');
+			timer = setInterval(function(){
+
+				var iSpeed = (iTarget - oDiv.offsetLeft)/18;
+				console.log(iSpeed);
+				//因为会出现小数(除法),而px是页面最小的单位，计算机会把1px和1.3234px当做1px,不会进行四合五入，只会省略小数位，所以会达不到预计的位置，需要使用ceil()或者floor();
+				iSpeed = iSpeed > 0?Math.ceil(iSpeed):Math.floor(iSpeed);//当目标点小于当前盒子位置时，需要倒回来，测试
+
+				if(oDiv.offsetLeft == iTarget){
+					clearInterval(timer);
+				}
+				else{
+					oDiv.style.left = oDiv.offsetLeft + iSpeed + 'px';
+				}
+				
+			},30);
+		};
+
+		window.onload = function(){
+			document.getElementById('start').onclick = function(){
+				startMove(400);
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="button" value='开始运动' id='start'>
+	<div id= 'div1'></div>
+	<div class='line'></div>
+	<!-- <div class='line1'></div> -->
+</body>
+</html>

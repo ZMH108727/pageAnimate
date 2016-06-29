@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>重力</title>
+	<style type="text/css">
+	#div1{
+		width: 100px;
+		height: 100px;
+		position: fixed;
+		left: 0;
+		top:0;
+		background-color: #541;
+	}
+	</style>
+	<script type="text/javascript">
+		var speedX = 0;
+		var speedY = 0;
+		var timer;
+		window.onload = function(){
+
+			var oDiv = document.getElementById('div1');
+			oDiv.onmousedown = function(ev){
+				clearInterval(oDiv.timer);
+				var lastX = 0;
+				var lastY = 0;
+
+				var oEvent = ev||window.event;
+
+				var disX = oEvent.clientX - oDiv.offsetLeft;
+				var disY = oEvent.clientY - oDiv.offsetTop;
+
+
+				document.onmousemove = function(ev){
+					var oEvent = ev||window.event;
+					oDiv.style.left = oEvent.clientX - disX + 'px';
+					oDiv.style.top = oEvent.clientY - disY + 'px';
+
+					speedX = oEvent.clientX - disX - lastX;
+
+					speedY = oEvent.clientY - disY - lastY;
+
+					lastX = oEvent.clientX - disX;
+					lastY = oEvent.clientY - disY;
+
+
+
+					document.onmouseup = function(){
+						document.onmousemove = null;
+						document.onmouseup = null;
+						startMove(oDiv);
+					}
+				}
+				
+				return false;
+
+			}
+		}
+
+		function startMove(obj){
+
+			obj.timer = setInterval(function(){
+				speedY += 3;
+				var l = obj.offsetLeft + speedX;
+				var t = obj.offsetTop + speedY;
+				
+				if(l<=0)
+				{
+					speedX *=-0.8;
+					l = 0;
+				}
+				else if(l>=document.documentElement.clientWidth - obj.offsetWidth){
+					speedX *=-0.8;
+					l = document.documentElement.clientWidth - obj.offsetWidth;
+				}
+				if(t<=0)
+				{
+					speedY *=-0.8;
+					t = 0;
+				}
+				else if(t >= document.documentElement.clientHeight - obj.offsetHeight){
+					speedY *=-0.8;
+					speedX *=0.8;
+					t = document.documentElement.clientHeight - obj.offsetHeight;
+				}
+
+				if(Math.abs(speedX) < 1){
+					speedX = 0;
+				}
+				if(Math.abs(speedY) < 1){
+					speedY = 0;
+				}
+
+				if(speedX == 0 && speedY == 0){
+					clearInterval(timer);
+				}
+				
+				obj.style.left = l +'px';
+				obj.style.top = t +'px';
+			},30);
+
+
+		}
+
+	</script>
+</head>
+<body>
+	<div id='div1'></div>
+</body>
+</html>

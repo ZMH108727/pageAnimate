@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{
+		margin:0;
+		padding:0;
+	}
+	div{
+		width:100px;
+		height: 100px;
+		background-color: #08BBf2;
+		position: absolute;
+		left:20px;
+	}
+	#div2{
+		width:1px ;
+		height: 400px;
+		position:absolute;
+		left:800px;
+		background-color: #000;
+
+	}
+	</style>
+</head>
+<body>
+	<div id='div1'></div>
+	<div id="div2"></div>
+	<script type="text/javascript">
+	var oDiv = document.getElementById('div1');
+	var oDiv1 = document.getElementById('div2');
+	oDiv1.onmouseover = startMove(oDiv1,800)
+	oDiv.onclick = startMove(oDiv,800);
+	function startMove(obj,iTarget){
+		var timer;
+		var iSpeed;
+		timer = setInterval(function(){
+
+			iSpeed = (iTarget - obj.offsetLeft)/12;
+
+			iSpeed = iSpeed>0?Math.ceil(iSpeed):Math.floor(iSpeed);
+
+			// console.log(iSpeed);
+			if(obj.offsetLeft+iSpeed >= iTarget){
+				obj.style.left = iTarget + 'px';
+				clearInterval(timer);
+			}else{
+				obj.style.left = obj.offsetLeft+iSpeed+'px';
+			}
+		},30);
+	}
+	</script>
+</body>
+</html>

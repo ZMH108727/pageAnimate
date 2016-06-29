@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{
+		margin:0;
+		padding:0;
+		list-style: none;
+	}
+	li{
+		width:20px;
+		height: 20px;
+		border:1px solid red;
+		border-radius: 30%;
+		position: absolute;
+	}
+	#snake_head{
+		width:20px;
+		height: 20px;
+		border:1px solid red;
+		border-radius: 4px;
+		background-color: orange;
+	}
+	</style>
+</head>
+<body>
+	<div id='box'>
+		<ul id='snake'>
+			<li id='snake_head'></li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+	window.onload = function(){
+		var snake = document.getElementById('snake'),
+			head  = document.getElementById('snake_head');
+
+			if()
+	}
+
+	function moveFn(snake){
+		var snakeBodys = snake.getElementsByTagName('li');
+		document.onmousemove = function(ev){
+			var oEvent = window.event || ev;
+			snakeBodys[0].style.top = oEvent.clientY + 'px';
+			snakeBodys[0].style.left = oEvent.clientX + 'px';
+			for (var i = snakeBodys.length-1; i > 0 ; i--) {
+				snakeBodys[i].style.top = snakeBodys[i-1].offsetTop + 'px';
+				snakeBodys[i].style.left = snakeBodys[i-1].offsetLeft + 'px';
+			};
+		}
+		
+	}
+	</script>
+</body>
+</html>

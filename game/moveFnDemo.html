@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	ul,li{
+		list-style: none;
+
+	}
+	li{
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		background-color: #521;
+	}
+	</style>
+</head>
+<body>
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<script type="text/javascript">
+	var lis = document.getElementsByTagName('li');
+	document.onmousemove =  function(ev){
+		var oEvent = ev||window.event;
+		lis[9].style.left = oEvent.clientX + 'px';
+		lis[9].style.top = oEvent.clientY + 'px';
+		for (var i = 0; i < lis.length-1 ; i++) {
+			lis[i].style.top = lis[i+1].offsetTop + 'px';
+			lis[i].style.left = lis[i+1].offsetLeft + 'px';
+		};
+	}
+
+	/*
+	document.onmousemove =  function(ev){
+		var oEvent = ev||window.event;
+		lis[0].style.left = oEvent.clientX + 'px';
+		lis[0].style.top = oEvent.clientY + 'px';
+		for (var i = lis.length-1; i > 0 ; i--) {
+			lis[i].style.top = lis[i-1].offsetTop + 'px';
+			lis[i].style.left = lis[i-1].offsetLeft + 'px';
+		};
+	}
+	*/
+	
+	</script>
+</body>
+</html>

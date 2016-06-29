@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{margin:0;padding: 0;list-style: none;}
+	html,body{
+		background-color: #08bbf2;
+		perspective: 100;
+		-webkit-perspective: 100;
+	}
+	#main{
+		position: relative;
+		width:200px;height:200px;
+		margin:200px auto;
+		/*perspective: 100;*/
+		transform:translateZ(-1000px);
+		/*-webkit-perspective: 100;*/
+		transform-style:preserve-3d;
+	}
+	/*ul{
+		position: relative;
+		width:200px;height:200px;
+		margin:400px auto;
+		perspective: 5500;
+		-webkit-perspective: 5500;
+		transform-style:preserve-3d;
+		transform:rotateX(90deg);
+	}*/
+	i{
+		position: absolute;
+		left: 0;
+		width: 100px;
+		height: 100px;
+		top:0;
+		background-color: #fff;
+		box-shadow: 0 0 40px #fff;
+		border-radius: 50%;
+	}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+	</div>
+	<script type="text/javascript">
+
+		var is = document.getElementsByTagName('i');
+
+		var deg = 360/is.length;
+
+		for (var i = 0; i < is.length; i++) {
+			is[i].style.transform = "rotateZ(" + (deg*i) +"deg) translateX(236px)";
+		};
+
+		var animateIndex = 0;
+		setInterval(function(){
+			if(is[animateIndex].style.transform == "rotateZ(" + (deg*animateIndex) +"deg) translateX(236px) translateZ(1200px)"){
+				is[animateIndex].style.transform = "rotateZ(" + (deg*animateIndex) +"deg) translateX(236px)";
+			}
+			else{
+				is[animateIndex].style.transform +='translateZ(1200px)';
+			}
+
+			animateIndex ++;
+			if(animateIndex == is.length){
+				animateIndex = 0;
+			}
+		},100);
+
+
+		console.log(is[0].style.transform.translateZ);
+
+	</script>
+</body>
+</html>

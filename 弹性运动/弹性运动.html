@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	#div1{
+		width:100px;
+		height: 20px;
+		background-color: #541;
+		position: absolute;
+		left: 0;
+		
+	}
+	</style>
+	<script type="text/javascript">
+
+	function startMove(obj,attr,iTarget,fn){
+		clearInterval(obj.timer);
+		var iCur = 0;
+		var iSpeed = 0;
+		var left = 0;
+		
+		obj.timer = setInterval(function(){
+			iCur = parseInt(getStyle(obj,attr));
+			iSpeed+=(iTarget-iCur)/5;
+			iSpeed *= 0.7;
+			left += iSpeed;
+			console.log(iSpeed);
+			console.log(left);
+
+			if(Math.abs(iSpeed) < 1 &&Math.abs(iCur - iTarget)<1){
+				clearInterval(obj.timer);
+				obj.style[attr] = iTarget + 'px';
+			}
+			else{
+				obj.style[attr] = left + 'px';
+			}
+			
+			// console.log(getStyle(obj,attr));
+		},30);
+	}
+	function getStyle(obj,attr){
+		if(window.getComputedStyle){
+			return window.getComputedStyle(obj,false)[attr];
+		}
+		else{
+			return obj.currentStyle[attr];
+		}
+	}
+
+	window.onload= function(){
+		var obtn = document.getElementById('btn');
+		var oDiv = document.getElementById('div1');
+		obtn.onclick = function(){
+			startMove(oDiv,'height',200);
+		}
+	}
+	</script>
+	
+</head>
+<body>
+
+	<button id="btn">开始运动</button>
+	<div id="div1"></div>
+</body>
+</html>

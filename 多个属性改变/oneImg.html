@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	.photos{
+		width: 1144px;
+		height: auto;
+		margin:20px auto;
+		overflow: hidden;
+	}
+	img{
+		float: left;
+		width: auto;
+		height: 172px;
+	}
+	</style>
+</head>
+<body>
+	<div class="photos">
+		
+	</div>
+	<script type="text/javascript">
+	var box = document.getElementsByClassName('photos')[0];
+	for (var i = 0; i < 1; i++) {
+		var img = new Image();
+		img.src = '../imgs/' + 6 + '.png';
+		box.appendChild(img);
+	};
+	var imgWidth,imgHeight;
+
+	// document.getElementById('box').style.height = document.getElementById('box').offsetHeight + 'px';
+
+	var img = box.getElementsByTagName('img')[0];
+	img.onload = function(){
+		imgWidth = parseInt(getStyle(this,'width'));
+		imgHeight = parseInt(getStyle(this,'height'));
+	}
+	var tHeight = 0;
+	img.speed = 0;
+	img.onmouseover = function(){
+		changFn(this,imgHeight*2);
+	}
+	img.onmouseout = function(){
+		changFn(this,imgHeight);
+	}
+	var iSpeed = 0;
+	function changFn(obj,iTarget){
+		clearInterval(obj.timer);
+		
+		obj.timer = setInterval(function(){
+
+			iSpeed += (iTarget - obj.offsetHeight)/5;
+
+			iSpeed *=0.72;
+			if(tHeight<0){
+				tHeight = 0;
+			}
+			tHeight += iSpeed;
+
+			if(Math.abs(iSpeed) < 1){
+				clearInterval(obj.timer);
+				obj.style.height = iTarget + 'px';
+			}
+			else{
+
+				obj.style.height = tHeight + 'px';
+				obj.style.marginTop = -imgHeight/2 + 'px';
+				obj.style.marginLeft = -imgWidth/2 + 'px';
+			}
+			
+			console.log(obj.offsetWidth);
+
+		},30);
+	}
+
+	function getStyle(obj,prop){
+
+		if(obj.currentStyle){
+			return obj.currentStyle[prop];
+		}
+		else{
+			return getComputedStyle(obj,false)[prop];
+		}
+	}
+	</script>
+</body>
+</html>

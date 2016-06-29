@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{
+		margin:0;
+		padding: 0;
+	}
+	#div1{
+		width:100px;
+		height: 100px;
+		background-color: #08bbf2;
+		position: absolute;
+		left: 000px;
+	}
+	.line{
+		width:1px;
+		height: 500px;
+		position: absolute;
+		left:300px;
+		background-color: red;
+	}
+	</style>
+	<script type="text/javascript">
+	var timer = null;
+	function startMove(iTarget){
+
+		var oDiv = document.getElementById('div1');
+		var iSpeed = 11;
+		//防止重复点击 速度加快，定时器叠加
+		clearInterval(timer);
+		timer = setInterval(function(){
+			if(oDiv.offsetLeft < iTarget){
+				iSpeed = 7;
+			}
+			else{
+				iSpeed = -7;
+			}
+
+			//当距离目标点足够近，已经无法正常完成下一次运动的时候，停止运动，直接赋值。
+			if(Math.abs(oDiv.offsetLeft - iTarget) < Math.abs(iSpeed)){//是否到达终点
+				clearInterval(timer); //到达终点后
+				oDiv.style.left = iTarget + 'px';
+			}
+			else{
+				oDiv.style.left = oDiv.offsetLeft + iSpeed + 'px';//到达终点之前
+			}
+			
+		},30);
+	}
+	</script>
+</head>
+<body>
+	<input type='button' value='开始运动' onclick='startMove(300);'>
+	<div id='div1'></div>
+	<div class='line'></div>
+</body>
+</html>
